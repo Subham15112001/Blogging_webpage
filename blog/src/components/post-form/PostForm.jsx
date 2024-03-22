@@ -41,7 +41,8 @@ export default function PostForm({ post }) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
                 const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
-
+                console.log(userData.$id)
+                console.log(data)
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }
@@ -71,7 +72,9 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <form onSubmit={handleSubmit(async (data)=>{
+            submit(data);
+        })} className="flex flex-wrap">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
