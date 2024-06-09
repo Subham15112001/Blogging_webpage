@@ -125,8 +125,15 @@ export class Service{
         }
     }
 
-    getFilePreview(fileId){
-        return this.bucket.getFilePreview(
+     getFilePreview(fileId){
+        return  this.bucket.getFilePreview(
+            conf.appwriteBucketId,
+            fileId
+        )
+    }
+
+    async getFile(fileId){
+        return await this.bucket.getFile(
             conf.appwriteBucketId,
             fileId
         )
